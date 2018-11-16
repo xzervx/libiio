@@ -7,6 +7,9 @@ handle_default() {
 	cmake -DENABLE_PACKAGING=ON -DDEB_DETECT_DEPENDENCIES=ON ..
 	make && make package
 	sudo dpkg -i libiio*.deb
+	if [ -n "${GH_DOC_TOKEN}" ] && [ -f "./generateDocumentationAndDeploy.sh" ] ; then
+		sh generateDocumentationAndDeploy.sh
+	fi
 }
 
 handle_centos() {
